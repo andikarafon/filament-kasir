@@ -10,6 +10,13 @@ class Category extends Model
 {
     use HasFactory;
 
+    protected $fillable = [
+        'name',
+        'slug',
+        'is_active',
+        'description',
+    ];
+
     //1 kategori memiliki banyak produk
     public function products(): HasMany
     {
