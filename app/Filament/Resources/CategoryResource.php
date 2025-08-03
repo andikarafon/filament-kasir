@@ -5,8 +5,10 @@ namespace App\Filament\Resources;
 use App\Filament\Resources\CategoryResource\Pages;
 use App\Filament\Resources\CategoryResource\RelationManagers;
 use App\Models\Category;
+use Closure;
 use Filament\Forms;
 use Filament\Forms\Form;
+use Filament\Forms\Set;
 use Filament\Resources\Resource;
 use Filament\Tables;
 use Filament\Tables\Table;
@@ -24,10 +26,15 @@ class CategoryResource extends Resource
         return $form
             ->schema([
                 Forms\Components\TextInput::make('name')
+                    ->afterStateUpdated(function (Set $set, $state) {
+                        $set('slug', Category::generateUniqueSlug($state));
+                    })
                     ->required()
+                    ->live(onBlur: true)
                     ->maxLength(255),
                 Forms\Components\TextInput::make('slug')
                     ->required()
+                    ->readOnly()
                     ->maxLength(255),
                 Forms\Components\Textarea::make('description')
                     ->columnSpanFull(),
