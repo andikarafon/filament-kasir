@@ -5,6 +5,7 @@ namespace App\Filament\Resources;
 use App\Filament\Resources\OrderResource\Pages;
 use App\Filament\Resources\OrderResource\RelationManagers;
 use App\Models\Order;
+use App\Models\PaymentMethod;
 use App\Models\Product;
 use Filament\Forms;
 use Filament\Forms\Components\Repeater;
@@ -80,7 +81,27 @@ class OrderResource extends Resource
                         Forms\Components\Section::make('Pembayaran')
                         ->schema([
                             Forms\Components\Select::make('payment_method_id')
-                                ->relationship('paymentMethod', 'name'),
+                                ->relationship('paymentMethod', 'name')
+                                ->reactive()
+                                ->afterStateUpdated(function ($state, Get $get, Set $set) {
+                                    $paymentMethod = PaymentMethod::find($state);
+                                    $set('is_cash', $paymentMethod?->is_cash ?? false);
+
+                                    if (!$paymentMethod->is_cash) {
+                                        $set('change_amount', 0);
+                                        $set('paid_amount', $get('total_price'));
+                                    }
+                                })
+                                ->afterStateHydrated(function (Get $get, Set $set, $state) {
+                                    $paymentMethod = PaymentMethod::find($state);
+                                    if (!$paymentMethod?->is_cash) {
+                                        $set('paid_amount', $get('total_price'));
+                                        $set('change_amount', 0);
+                                    }
+
+                                    $set('is_cash', $paymentMethod?->is_cash ?? false);
+                                    
+                                }),
                             Forms\Components\TextInput::make('paid_amount')
                                 ->numeric(),
                             Forms\Components\TextInput::make('change_amount')
