@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "68fad49463268d4aa088fd2b6776e7a1",
+    "content-hash": "f61a7da0081ace9c4f39ba380387b32e",
     "packages": [
         {
             "name": "anourvalar/eloquent-serialize",
@@ -3142,6 +3142,70 @@
                 }
             ],
             "time": "2025-07-17T05:12:15+00:00"
+        },
+        {
+            "name": "mansoor/blade-lets-icons",
+            "version": "v1.0.2",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/mansoorkhan96/blade-lets-icons.git",
+                "reference": "0217edf1b5cc23a30004af7d522fecc4c0ffbc45"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/mansoorkhan96/blade-lets-icons/zipball/0217edf1b5cc23a30004af7d522fecc4c0ffbc45",
+                "reference": "0217edf1b5cc23a30004af7d522fecc4c0ffbc45",
+                "shasum": ""
+            },
+            "require": {
+                "blade-ui-kit/blade-icons": "^1.6",
+                "illuminate/support": "^9.0|^10.0|^11.0|^12.0",
+                "php": "^8.0"
+            },
+            "require-dev": {
+                "orchestra/testbench": "^7.0|^8.0|^9.0|^10.0",
+                "phpunit/phpunit": "^9.0|^10.5|^11.0|^12.0"
+            },
+            "type": "library",
+            "extra": {
+                "laravel": {
+                    "providers": [
+                        "Mansoor\\LetsIcons\\BladeLetsIconsServiceProvider"
+                    ]
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Mansoor\\LetsIcons\\": "src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Mansoor Ahmed"
+                }
+            ],
+            "description": "A package to easily make use of Lets Icons in your Laravel Blade views.",
+            "homepage": "https://github.com/mansoorkhan96/blade-lets-icons",
+            "keywords": [
+                "Lets Icons",
+                "blade",
+                "laravel"
+            ],
+            "support": {
+                "issues": "https://github.com/mansoorkhan96/blade-lets-icons/issues",
+                "source": "https://github.com/mansoorkhan96/blade-lets-icons/tree/v1.0.2"
+            },
+            "funding": [
+                {
+                    "url": "https://github.com/sponsors/mansoorkhan96",
+                    "type": "github"
+                }
+            ],
+            "time": "2025-05-22T05:35:38+00:00"
         },
         {
             "name": "masterminds/html5",
