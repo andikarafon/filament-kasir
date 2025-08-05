@@ -43,6 +43,12 @@
                 </div>
             </div>
         </div>
+        <form wire:submit="checkout">
+            {{$this->form}}
+            <x-filament::button 
+                type="submit" 
+                class="w-full bg-red-500 mt-3 text-white py-2 rounded">Checkout</x-filament::button>
+        </form>
        
         <div class="mt-2">
 

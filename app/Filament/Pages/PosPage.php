@@ -11,4 +11,6 @@ class PosPage extends Page
     protected static string $view = 'filament.pages.pos-page';
 
     protected static ?int $navigationSort = 6;
+
+    
 }
