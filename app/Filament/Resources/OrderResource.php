@@ -83,11 +83,11 @@ class OrderResource extends Resource
                             Forms\Components\Select::make('payment_method_id')
                                 ->relationship('paymentMethod', 'name')
                                 ->reactive()
-                                ->afterStateUpdated(function ($state, Get $get, Set $set) {
+                                ->afterStateUpdated(function ($state, Get $get, Set $set) { //$state itu berisi payment_method_id
                                     $paymentMethod = PaymentMethod::find($state);
                                     $set('is_cash', $paymentMethod?->is_cash ?? false);
 
-                                    if (!$paymentMethod->is_cash) {
+                                    if (!$paymentMethod?->is_cash) { //metode untuk null safety!$paymentMethod?
                                         $set('change_amount', 0);
                                         $set('paid_amount', $get('total_price'));
                                     }
@@ -102,10 +102,21 @@ class OrderResource extends Resource
                                     $set('is_cash', $paymentMethod?->is_cash ?? false);
                                     
                                 }),
+                                Forms\Components\Hidden::make('is_cash')
+                                    ->dehydrated(),
                             Forms\Components\TextInput::make('paid_amount')
-                                ->numeric(),
+                                ->numeric()
+                                ->reactive()
+                                ->label('Nominal Bayar')
+                                ->readOnly(fn (Get $get) => $get('is_cash') == false)
+                                ->afterStateUpdated(function (Set $set, Get $get, $state) {
+                                    //function untuk menghitung uang kembalian
+                                    self::updateExchangePaid($get, $set);
+                                }),
                             Forms\Components\TextInput::make('change_amount')
-                                ->numeric(),
+                                ->numeric()
+                                ->label('Kembalian')
+                                ->readOnly(),
                         ])
                     ]),
                 
