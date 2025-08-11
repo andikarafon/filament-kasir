@@ -6,6 +6,7 @@ use Filament\Tables;
 use Filament\Tables\Table;
 use Filament\Widgets\TableWidget as BaseWidget;
 use App\Models\Product;
+use App\Models\OrderProduct;
 
 class ProductFavorite extends BaseWidget
 {
