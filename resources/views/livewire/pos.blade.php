@@ -1,8 +1,12 @@
 <div class="grid grid-cols-1 dark:bg-gray-900 md:grid-cols-3 gap-4">
     <div class="md:col-span-2 bg-white dark:bg-gray-800 shadow-md rounded-lg p-6">
-        <div class="mb-4">
+        <div class="mb-4 flex gap-2">
             <input wire:model.live.debounce.300ms='search' type="text" placeholder="Cari produk..."
                 class="w-full p-2 border border-gray-300 dark:border-gray-700 rounded-lg bg-white dark:bg-gray-900 text-gray-900 dark:text-gray-100">
+                <x-filament::button x-data="" x-on:click="$dispatch('toggle-scanner')" color="primary">
+                    Scan Barcode
+                </x-filament::button>
+                <livewire:scanner-modal-component/> <!-- component modal yang sudah dibuat sebelumnya -->
         </div>
         <div class="flex-grow">
             <div class="grid grid-cols-8 sm:grid-cols-3 md:grid-cols-8 lg:grid-cols- gap-4">
@@ -59,3 +63,4 @@
         </div>
     </div>
 </div>
+<script src="https://unpkg.com/html5-qrcode"></script>

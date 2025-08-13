@@ -31,6 +31,11 @@ class Pos extends Component implements HasForms
     public $order_items = [];
     public $total_price;
 
+    protected $listeners = [
+        'loadOrderItems',
+        'scanResult' => 'handleScanResult'
+    ];
+
     public function render()
     {
         return view('livewire.pos', [
@@ -220,6 +225,21 @@ class Pos extends Component implements HasForms
 
         return redirect()->to('admin/orders');
         
+    }
+
+    public function handleScanResult($decodedText)
+    {
+        // dd($decodeText);
+        $product = Product::where('barcode', $decodedText)->first();
+
+        if ($product) {
+            $this->addToOrder($product->id);
+        } else {
+            Notification::make()
+                ->title('Product not found '.$decodedText)
+                ->danger()
+                ->send();
+        }
     }
 
 
