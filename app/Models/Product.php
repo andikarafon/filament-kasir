@@ -24,6 +24,9 @@ class Product extends Model
             'description',
     ];
 
+    //menambahkan agar image url bisa diakses
+    protected $appends = ['image_url'];
+
     //1 produk hanya punya 1 kategori
     public function category(): BelongsTo
     {

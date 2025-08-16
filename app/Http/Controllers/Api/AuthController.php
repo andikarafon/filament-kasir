@@ -11,8 +11,17 @@ class AuthController extends Controller
 {
     public function login(Request $request)
     {
+       //komen di email dan password yang di bawah ini, akan muncul di api/docs scramble
        $request->validate([
+             /**
+             * Email
+             * @example wulandari@gls.com
+             */
             'email' => 'required|email',
+            /**
+             * Password
+             * @example edppdew
+            */
             'password' => 'required'
         ]);
 

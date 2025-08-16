@@ -11,13 +11,20 @@ class PaymentMethod extends Model
     use HasFactory;
 
     protected $fillable = [
-        'name',  
-        'image',  
-        'is_cash',  
+        'name',
+        'image',
+        'is_cash',
     ];
 
-    public function orders(): HasMany 
+    protected $appends = ['image_url'];
+
+    public function orders(): HasMany
     {
         return $this->hasMany(Order::class);
+    }
+
+    public function getImageUrlAttribute()
+    {
+        return $this->image ? url('storage/'. $this->image) : null;
     }
 }
